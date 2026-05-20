@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-black text-white">
+
+    <!-- BACK BUTTON -->
+    <div class="p-6">
+        <a href="index.html" class="group inline-flex items-center gap-3 px-4 py-2 rounded-2xl
+           bg-white/5 border border-white/10 backdrop-blur-xl
+           text-purple-200 hover:text-white
+           transition-all duration-300
+           hover:bg-white/10 hover:scale-[1.03]
+           active:bg-red-500/20 active:text-red-300 active:border-red-400">
+
+            <span class="text-lg group-hover:-translate-x-1 transition">
+                ←
+            </span>
+
+            <span class="font-medium tracking-wide">
+                Back to shop
+            </span>
+
+            <span class="w-2 h-2 rounded-full bg-purple-400 opacity-60 group-hover:opacity-100 transition"></span>
+
+        </a>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 pb-20 grid md:grid-cols-2 gap-10">
+
+        <!-- LEFT: CART ITEMS -->
+        <!-- LEFT: CART ITEMS -->
+        <div
+            class="relative rounded-3xl p-[1px] bg-gradient-to-br from-purple-900 via-pink-500 to-indigo-900 shadow-2xl">
+
+            <div class="relative bg-white/10 backdrop-blur-xl rounded-3xl p-6 flex flex-col h-full overflow-hidden">
+
+                <!-- decorative blur -->
+                <div class="absolute -top-20 -right-20 w-64 h-64 bg-purple-500/20 blur-3xl rounded-full"></div>
+                <div class="absolute bottom-[-80px] left-[-80px] w-64 h-64 bg-pink-500/20 blur-3xl rounded-full"></div>
+
+                <!-- HEADER -->
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-black text-white">Your Order</h2>
+
+                    <span class="px-3 py-1 text-xs rounded-full bg-white/10 border border-white/10 text-purple-200">
+                        fast checkout
+                    </span>
+                </div>
+
+                <!-- CART LIST -->
+                <div id="checkoutList" class="flex flex-col gap-4 flex-1 overflow-y-auto pr-2"></div>
+
+                <!-- EMPTY UI IDEA (visual comfort) -->
+                <div class=" flex flex-col items-center justify-center py-10 text-center text-purple-600">
+                    <div class="text-5xl mb-3">🛒</div>
+                    <p class="text-sm">Your cart is empty</p>
+                </div>
+
+                <!-- TOTAL CARD (more visual) -->
+                <div class="mt-6 pt-6 border-t border-white/10">
+
+                    <div class="flex items-center justify-between bg-white/5 p-4 rounded-2xl backdrop-blur-md">
+
+                        <!-- small image comfort -->
+                        <div class="flex items-center gap-3">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"
+                                class="w-10 h-10 rounded-xl bg-white/10 p-2" />
+
+                            <div>
+                                <p class="text-xs text-purple-600">Order Summary</p>
+                                <p class="text-white font-medium">Secure checkout</p>
+                            </div>
+                        </div>
+
+                        <div class="text-right">
+                            <p class="text-xs text-purple-200">Total</p>
+                            <span id="checkoutTotal"
+                                class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-pink-400">
+                                0
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- RIGHT: FORM -->
+        <div class="bg-white/10 border border-white/10 backdrop-blur-xl rounded-3xl p-6 shadow-2xl">
+
+            <h2 class="text-2xl font-black mb-6">Shipping Details</h2>
+
+            <div class="space-y-4">
+
+                <input type="text" placeholder="Full Name"
+                    class="w-full p-4 rounded-2xl bg-black/20 border border-white/10 focus:outline-none focus:border-purple-400">
+
+                <input type="text" placeholder="Address"
+                    class="w-full p-4 rounded-2xl bg-black/20 border border-white/10 focus:outline-none focus:border-purple-400">
+
+                <input type="text" placeholder="Phone Number"
+                    class="w-full p-4 rounded-2xl bg-black/20 border border-white/10 focus:outline-none focus:border-purple-400">
+
+                <input type="text" placeholder="Promo Code"
+                    class="w-full p-4 rounded-2xl bg-black/20 border border-white/10 focus:outline-none focus:border-purple-400">
+
+            </div>
+
+            <button
+                class="w-full mt-6 py-4 rounded-2xl bg-gradient-to-r from-purple-600 via-pink-500 to-purple-500 font-bold text-lg hover:scale-[1.02] transition shadow-xl">
+                Pay Now →
+            </button>
+            <!-- BANK LOGOS -->
+            <div class="mt-8 flex items-center gap-4 flex-wrap">
+
+                <img src="https://spponeimages.azureedge.net/prod/557662bd-eaee-478f-9da3-5b3eb08bf658logo.jpg"
+                    class="h-6 opacity-70 hover:opacity-100 transition" />
+
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original"
+                    class="h-6 opacity-70 hover:opacity-100 transition" />
+
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/PayPal_logo.svg"
+                    class="h-6 opacity-70 hover:opacity-100 transition" />
+
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Kapital_Bank_logo_2025.png"
+                    class="h-6 opacity-70 hover:opacity-100 transition" />
+
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/ABB_Logo.png"
+                    class="h-6 opacity-70 hover:opacity-100 transition" />
+
+                <img src="https://wp.logos-download.com/wp-content/uploads/2020/07/Yelo_Bank_Logo.png?dl"
+                    class="h-6 opacity-70 hover:opacity-100 transition" />
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        const checkoutList = document.getElementById("checkoutList");
+        const checkoutTotal = document.getElementById("checkoutTotal");
+
+        const renderCheckout = () => {
+            checkoutList.innerHTML = "";
+
+            const emptyState = document.querySelector(".text-purple-600")?.parentElement;
+
+            if (cart.length === 0) {
+                emptyState.classList.remove("hidden");
+            } else {
+                emptyState.classList.add("hidden");
+            }
+
+            let total = 0;
+
+            cart.forEach(item => {
+                total += item.price * item.count;
+
+                checkoutList.innerHTML += `
+          <div class="flex items-center justify-between bg-black/20 p-4 rounded-2xl border border-white/10">
+
+            <div>
+              <h3 class="font-bold">${item.title}</h3>
+              <p class="text-purple-300 text-sm">Qty: ${item.count}</p>
+            </div>
+
+            <span class="font-black text-pink-400">
+              $${(item.price * item.count).toFixed(2)}
+            </span>
+
+          </div>
+        `;
+            });
+
+            checkoutTotal.innerText = "$" + total.toFixed(2);
+        };
+
+        const saveCart = () => {
+  localStorage.setItem("cart", JSON.stringify(cartList));
+}
+        renderCheckout();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-purple-500 via-purple-400 to-purple-300">
+
+    <!-- LOADER -->
+    <div id="loader" class="fixed inset-0 flex items-center justify-center bg-white/80 backdrop-blur-xl z-50">
+        <div class="flex flex-col items-center gap-4">
+            <div class="w-16 h-16 border-4 border-gray-200 border-t-black rounded-full animate-spin"></div>
+            <p class="text-gray-600 tracking-widest">Loading products...</p>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-10">
+
+        <!-- HEADER -->
+        <div class="backdrop-blur-xl bg-white/70 border border-white/40 shadow-xl rounded-3xl p-6 mb-10">
+
+            <!-- CATEGORY -->
+            <div id="categories" class="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x mb-6">
+                <button onclick="getCategoryProducts('https://dummyjson.com/products')" class="
+          snap-start px-5 py-2 rounded-full bg-black text-white font-semibold whitespace-nowrap
+          hover:scale-105 transition">
+                    All
+                </button>
+            </div>
+
+            <!-- INFO + SEARCH -->
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+
+                <!-- LEFT INFO -->
+                <div class="space-y-1">
+                    <p class="text-purple-200 text-sm tracking-wide">Available Products</p>
+
+                    <h2 class="text-3xl md:text-4xl font-black tracking-tight">
+                        Total Products:
+                        <span id="totalCount"
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-400">
+                            120
+                        </span>
+                    </h2>
+
+                    <div class="w-24 h-[2px] bg-gradient-to-r from-purple-500 to-transparent rounded-full"></div>
+                </div>
+
+                <!-- SEARCH -->
+                <div class="relative w-full md:w-[350px] group">
+
+                    <input type="search" id="searchInput" placeholder="Search amazing products..." class="
+        w-full h-[55px]
+        pl-12 pr-4
+        rounded-2xl
+
+        bg-white/10 backdrop-blur-xl
+        border border-white/10
+
+        text-black placeholder:text-purple-300
+
+        shadow-lg
+        transition-all duration-300
+
+        focus:outline-none
+        focus:border-purple-900
+        focus:shadow-[0_0_25px_rgba(168,85,247,0.5)]
+        focus:scale-[1.02]
+      " />
+
+                    <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-purple-400 group-focus-within:text-purple-600 transition"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+
+                </div>
+
+            </div>
+
+            <!-- PRODUCTS -->
+            <div id="products" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+
+            <!-- PAGINATION -->
+            <div id="paginations" class="flex justify-center gap-3 mt-10"></div>
+
+        </div>
+
+        <!-- BASKET BUTTON -->
+        <div id="basketBtn" class="fixed bottom-6 right-6 z-40">
+
+            <button class="
+    relative w-16 h-16 rounded-2xl
+
+    bg-gradient-to-br from-black via-gray-900 to-gray-800
+    text-white
+
+    shadow-[0_10px_40px_rgba(0,0,0,0.4)]
+    
+    transition-all duration-300 ease-out
+    hover:scale-110 hover:rotate-6 hover:shadow-[0_20px_60px_rgba(239,68,68,0.4)]
+
+    active:scale-95
+    group
+  ">
+                <span
+                    class="absolute inset-0 rounded-2xl bg-red-500/20 animate-ping opacity-0 group-hover:opacity-100"></span>
+                <span class="relative text-2xl group-hover:scale-110 transition inline-block">
+                    🛒
+                </span>
+                <span id="count" class="
+        absolute -top-2 -right-2
+        w-7 h-7
+        bg-gradient-to-br from-red-500 to-pink-500
+        rounded-full
+
+        flex items-center justify-center
+        text-xs font-bold
+
+        shadow-lg
+        border border-white/20
+
+        animate-bounce
+      ">
+                </span>
+
+            </button>
+        </div>
+
+        <!-- QUICK BASKET -->
+        <!-- QUICK BASKET -->
+        <div id="quickBasket"
+            class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 hidden transition-all duration-300">
+
+            <!-- PANEL -->
+            <div class="relative ml-auto w-full sm:w-[450px] h-full flex flex-col overflow-hidden
+
+        bg-gradient-to-br from-[#1e1b4b] via-[#2e1065] to-black
+
+        border-l border-white/10
+
+        shadow-[0_0_60px_rgba(168,85,247,0.35)]
+
+        animate-[slideIn_.4s_ease]
+    ">
+
+                <!-- glow -->
+                <div class="absolute top-[-120px] right-[-120px] w-[260px] h-[260px]
+        bg-purple-500/20 blur-3xl rounded-full"></div>
+
+                <div class="absolute bottom-[-120px] left-[-120px] w-[240px] h-[240px]
+        bg-pink-500/20 blur-3xl rounded-full"></div>
+
+                <!-- HEADER -->
+                <div class="relative p-6 border-b border-white/10 flex justify-between items-center">
+
+                    <div>
+                        <p class="text-sm text-purple-200 tracking-wide">
+                            Your Basket
+                        </p>
+
+                        <h2 class="text-3xl font-black text-white">
+                            Cart Items
+                        </h2>
+                    </div>
+
+                    <!-- close -->
+                    <button onclick="closeBasket()" class="w-11 h-11 rounded-xl bg-white/10 border border-white/10
+                text-white text-xl
+                hover:bg-red-500 hover:rotate-90 transition duration-300">
+
+                        ✕
+                    </button>
+                </div>
+
+                <!-- CART LIST -->
+                <div id="cartList"
+                    class="relative flex-1 overflow-y-auto p-5 flex flex-col gap-4 scrollbar-thin scrollbar-thumb-purple-500">
+                </div>
+
+                <!-- FOOTER -->
+                <div class="relative p-6 border-t border-white/10 bg-white/5 backdrop-blur-xl">
+
+                    <div class="flex justify-between items-center mb-5">
+
+                        <div>
+                            <p class="text-purple-200 text-sm">
+                                Total Price
+                            </p>
+
+                            <span id="totalPrice" class="text-4xl font-black text-transparent bg-clip-text
+                        bg-gradient-to-r from-purple-300 to-pink-400">
+
+                                0
+                            </span>
+                        </div>
+
+                        <!-- mini badge -->
+                        <div class="w-14 h-14 rounded-2xl bg-white/10 border border-white/10
+                    flex items-center justify-center text-2xl shadow-lg">
+
+                            🛒
+                        </div>
+
+                    </div>
+
+                    <!-- button -->
+                    <button class="
+                relative overflow-hidden
+
+                w-full h-[60px]
+                rounded-2xl
+
+                bg-gradient-to-r from-purple-600 via-purple-500 to-pink-500
+
+                text-white font-bold text-lg
+
+                shadow-[0_10px_40px_rgba(168,85,247,0.45)]
+
+                hover:scale-[1.02]
+                hover:shadow-[0_20px_60px_rgba(236,72,153,0.35)]
+
+                active:scale-[0.98]
+
+                transition-all duration-300
+            ">
+
+                        <span onclick="goToCheckout()" class="relative z-10 cursor-pointer">
+                            Checkout →
+                        </span>
+
+                        <!-- shine -->
+                        <span class="
+                    absolute inset-0
+                    bg-gradient-to-r from-transparent via-white/20 to-transparent
+
+                    -translate-x-[200%]
+                    hover:translate-x-[200%]
+
+                    transition duration-1000
+                "></span>
+
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <script src="./main.js"></script>
+
+</body>
+
+</html>
